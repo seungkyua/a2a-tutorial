@@ -1,6 +1,6 @@
 import os
 from dotenv import load_dotenv
-from google.adk.agents import LlmAgent
+from google.adk.agents import Agent
 from google.adk.agents.remote_a2a_agent import RemoteA2aAgent
 from google.adk.models.lite_llm import LiteLlm
 
@@ -15,7 +15,7 @@ remote_country_agent = RemoteA2aAgent(
     ),
 )
 
-travel_agent = LlmAgent(
+travel_agent = Agent(
     name = "travel_agent",
     model = LiteLlm(model="openai/gpt-5-nano"),
     description = (

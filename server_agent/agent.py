@@ -1,7 +1,7 @@
 import os
 from dotenv import load_dotenv
-# from google.adk.agents import Agent
-from google.adk.agents import LlmAgent
+from google.adk.agents import Agent
+# from google.adk.agents import LlmAgent
 from google.adk.models.lite_llm import LiteLlm
 from .instructions import country_agent_instruction, exchange_agent_instruction
 # from .tools import get_country_info, get_public_holidays, get_weather_forecast, get_current_date, get_exchange_rate
@@ -42,7 +42,7 @@ exchange_agent_tool_set = MCPToolset(
     tool_filter = ["get_current_date","get_exchange_rate"]
 )
 
-exchange_agent = LlmAgent(
+exchange_agent = Agent(
     name = "exchange_agent",
     model = LiteLlm(model="openai/gpt-5-nano"),
     description = (
@@ -54,7 +54,7 @@ exchange_agent = LlmAgent(
     tools = [exchange_agent_tool_set],
 )
 
-country_agent = LlmAgent(
+country_agent = Agent(
     name = "county_agent",
     model = LiteLlm(model="openai/gpt-5-nano"),
     description = "An agent that provides information about the country",
