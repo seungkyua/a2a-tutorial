@@ -4,10 +4,10 @@ This source is a slightly modified version based on the one presented by "Mehmet
 ## Environment
 ```shell
 # Create a virtual environment
-$ python3 -m venv venv
+$ python3 -m venv .venv
 
 # Activate the environment
-$ source venv/bin/activate
+$ source .venv/bin/activate
 
 # Install necessary libraries
 $ pip install google-adk fastmcp "google-adk[a2a]" requests numpy pandas openmeteo-requests dotenv litellm
