@@ -1,0 +1,77 @@
+binds:
+- port: 3000
+  listeners:
+  - protocol: HTTP
+    name: country_agent
+    routes:
+    - hostnames: []
+      matches:
+      - path:
+          pathPrefix: /
+      backends:
+      - mcp:
+          targets:
+          - name: mcp
+            mcp:
+              host: 127.0.0.1
+              port: 8001
+              path: /mcp
+      name: country-agent-route
+      policies:
+        cors:
+          allowOrigins:
+          - '*'
+          allowHeaders:
+          - '*'
+        mcpAuthorization:
+          rules:
+          - mcp.tool.name == "get_country_info" || mcp.tool.name == "get_weather_forecast" || mcp.tool.name == "get_public_holidays" || mcp.tool.name == "get_current_date"
+- port: 3001
+  listeners:
+  - protocol: HTTP
+    name: exchange_agent
+    routes:
+    - hostnames: []
+      matches:
+      - path:
+          pathPrefix: /
+      backends:
+      - mcp:
+          targets:
+          - name: mcp
+            mcp:
+              host: 127.0.0.1
+              port: 8001
+              path: /mcp
+      name: exchage_agent_route
+      policies:
+        cors:
+          allowOrigins:
+          - '*'
+          allowHeaders:
+          - '*'
+        mcpAuthorization:
+          rules:
+            - mcp.tool.name == "get_exchange_rate" || mcp.tool.name == "get_current_date"
+- port: 3002
+  listeners:
+  - protocol: HTTP
+    name: a2a_agent_server
+    hostname: localhost
+    routes:
+    - hostnames: []
+      matches:
+      - path:
+          pathPrefix: /
+      backends:
+        - host: localhost:8002
+      name: a2a_server_route
+      policies:
+        a2a: { }
+        cors:
+          allowCredentials: false
+          allowHeaders: ['*']
+          allowMethods: []
+          allowOrigins: ['*']
+          exposeHeaders: []
+          maxAge: null
