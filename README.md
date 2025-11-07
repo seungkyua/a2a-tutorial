@@ -33,3 +33,7 @@ $ uvicorn server_agent.agent:country_agent_server --host localhost --port 8002
 # client agent
 $ adk web
 ```
+
+## References
+- https://google.github.io/adk-docs/a2a/quickstart-exposing/
+- https://github.com/google/adk-python/blob/main/contributing/samples/hello_world_litellm/agent.py
